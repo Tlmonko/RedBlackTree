@@ -3,16 +3,13 @@
 
 int main() {
     RedBlackTree<int> tree;
-    tree.add(10);
+    tree.add(23);
+    tree.add(19);
+    tree.add(24);
     tree.add(11);
-    tree.add(12);
-    tree.add(8);
-
-    tree.remove(11);
+    tree.add(21);
     tree.add(13);
-    tree.add(11);
-    tree.add(9);
-    tree.add(5);
+    tree.remove(23);
     tree.print(tree.root, 0);
     return 0;
 }

@@ -123,6 +123,8 @@ void RedBlackTree<T>::rightRotate(Node<T> *node) {
             node->parent->leftChild = pivot;
         else
             node->parent->rightChild = pivot;
+    } else {
+        root = pivot;
     }
 
     if (pivot->rightChild)
@@ -147,9 +149,10 @@ void RedBlackTree<T>::remove(T value) {
     bool nodeOriginalIsRed = node->isRed;
 
     if (!node->rightChild->rightChild && !node->leftChild->leftChild) {
-        if (node == root)
+        if (node == root) {
             root = nullptr;
-        else {
+            return;
+        } else {
             if (node == node->parent->leftChild)
                 node->parent->leftChild = new Node<T>(node->parent);
             else
@@ -198,7 +201,7 @@ void RedBlackTree<T>::balanceRemoving(Node<T> *node) {
                 leftRotate(node->parent);
                 brother = node->parent->rightChild;
             }
-            if (brother->leftChild->isRed == brother->rightChild->isRed == false) {
+            if (brother->leftChild->isRed == false && brother->rightChild->isRed == false) {
                 brother->isRed = true;
                 node = node->parent;
             } else {
@@ -222,7 +225,7 @@ void RedBlackTree<T>::balanceRemoving(Node<T> *node) {
                 rightRotate(node->parent);
                 brother = node->parent->leftChild;
             }
-            if (brother->leftChild->isRed == brother->rightChild->isRed == false) {
+            if (brother->leftChild->isRed == false && brother->rightChild->isRed == false) {
                 brother->isRed = true;
                 node = node->parent;
             } else {
@@ -239,9 +242,8 @@ void RedBlackTree<T>::balanceRemoving(Node<T> *node) {
                 node = root;
             }
         }
-        node->isRed = false;
-        root->isRed = false;
     }
+    root->isRed = false;
 }
 
 template<typename T>
